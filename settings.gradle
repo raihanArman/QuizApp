@@ -1,5 +1,9 @@
 rootProject.name = "QuizApp"
 include ':app'
 include ':core'
-include ':home'
-include ':login'
+include ':features:home'
+include ':navigation'
+include ':features:login'
+include ':features:materi'
+include ':features:search'
+include ':features:profil'
