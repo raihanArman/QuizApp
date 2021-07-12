@@ -5,55 +5,90 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.co.core.data.model.Category
+import id.co.core.data.model.Materi
+import id.co.home.databinding.FragmentHomeBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var dataBinding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        return dataBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val popularAdapter = PopularAdapter()
+        val categoryAdapter = CategoryAdapter()
+
+        dataBinding.rvPopular.apply {
+            val horiz = LinearLayoutManager(requireContext())
+            horiz.orientation = LinearLayoutManager.HORIZONTAL
+            layoutManager = horiz
+            adapter = popularAdapter
+        }
+
+
+        dataBinding.rvCategory.apply {
+            val horiz = GridLayoutManager(requireContext(), 2)
+            layoutManager = horiz
+            adapter = categoryAdapter
+        }
+
+        val listMateri = mutableListOf<Materi>()
+        listMateri.add(Materi(
+            "C++ Programming",
+            "https://image.shutterstock.com/image-vector/logo-c-programming-language-icon-600w-693173473.jpg",
+            "20 Siswa"
+        ))
+        listMateri.add(Materi(
+            "C++ Programming",
+            "https://image.shutterstock.com/image-vector/logo-c-programming-language-icon-600w-693173473.jpg",
+            "20 Siswa"
+        ))
+        listMateri.add(Materi(
+            "C++ Programming",
+            "https://image.shutterstock.com/image-vector/logo-c-programming-language-icon-600w-693173473.jpg",
+            "20 Siswa"
+        ))
+        listMateri.add(Materi(
+            "C++ Programming",
+            "https://image.shutterstock.com/image-vector/logo-c-programming-language-icon-600w-693173473.jpg",
+            "20 Siswa"
+        ))
+
+        val listCategory = mutableListOf<Category>()
+        listCategory.add(Category(
+            "Math",
+            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90",
+        ))
+
+        listCategory.add(Category(
+            "Math",
+            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90",
+        ))
+        listCategory.add(Category(
+            "Math",
+            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90",
+        ))
+        listCategory.add(Category(
+            "Math",
+            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90",
+        ))
+
+
+        popularAdapter.setListMateri(listMateri)
+        categoryAdapter.setListCategory(listCategory)
+
     }
 }
