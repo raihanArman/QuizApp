@@ -33,7 +33,7 @@
                     android:id="@+id/circleImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@color/white"
+                    android:src="@drawable/lord"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,20 +49,22 @@
                     app:layout_constraintTop_toTopOf="@+id/circleImageView">
 
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/heebo_medium"
+                        android:text="ApisApis"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:text="ApisApis" />
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tv_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/heebo_regular"
+                        android:text="Mahasiswa"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:text="Mahasiswa" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <RelativeLayout
