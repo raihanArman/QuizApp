@@ -2,6 +2,7 @@ package id.co.core.data.repositories.remote
 
 import id.co.core.data.model.Category
 import id.co.core.data.model.Materi
+import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.network.ApiService
 import id.co.core.data.network.ResponseState
@@ -58,6 +59,20 @@ class RemoteDataSource(
                 }else{
                     emit(ResponseState.Empty)
                 }
+            }catch (e: Exception){
+                emit(ResponseState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun getQuizSearch(search: String): Flow<ResponseState<List<Quiz>>>{
+        return flow{
+            emit(ResponseState.Loading())
+            try{
+                val response = apiService.getQuizSearch(search)
+                val data = response.data
+
+                emit(ResponseState.Success(data))
             }catch (e: Exception){
                 emit(ResponseState.Error(e.toString()))
             }

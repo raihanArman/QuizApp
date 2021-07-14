@@ -1,5 +1,6 @@
 package id.co.core.di
 
+import com.google.gson.GsonBuilder
 import id.co.core.data.network.ApiService
 import id.co.core.data.repositories.DataRepository
 import id.co.core.data.repositories.remote.RemoteDataSource
@@ -21,10 +22,15 @@ object CoreModule {
                 .readTimeout(300, TimeUnit.SECONDS)
                 .build()
         }
+        single{
+            GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create()
+        }
         single {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(get()))
                 .client(get())
                 .build()
             retrofit.create(ApiService::class.java)

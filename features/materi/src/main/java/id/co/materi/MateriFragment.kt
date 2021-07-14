@@ -6,13 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import id.co.core.data.model.Materi
+import id.co.core.data.network.ResponseState
 import id.co.materi.databinding.FragmentMateriBinding
+import id.co.materi.module.MateriModule.materiModule
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class MateriFragment : Fragment() {
 
     private lateinit var dataBinding: FragmentMateriBinding
+    private val viewModel: MateriViewModel by viewModel()
+
+    private val adapter : MateriAdapter by lazy {
+        MateriAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,38 +35,37 @@ class MateriFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MateriAdapter()
+
+        loadKoinModules(materiModule)
+
+        setupAdapter()
+        setupObserve()
+
+    }
+
+    private fun setupObserve() {
+        viewModel.getMateri.observe(viewLifecycleOwner, Observer { response ->
+            when(response){
+                is ResponseState.Success ->{
+                    setDataMateri(response.data)
+                }
+                is ResponseState.Loading ->{
+
+                }
+                is ResponseState.Error ->{
+
+                }
+
+            }
+        })
+    }
+
+    private fun setDataMateri(data: List<Materi>) {
+        adapter.setListMateri(data)
+    }
+
+    private fun setupAdapter() {
         dataBinding.rvMateri.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         dataBinding.rvMateri.adapter = adapter
-
-        val listMateri = mutableListOf<Materi>()
-        listMateri.add(Materi(
-            "Mantap",
-            "https://cdn1-production-images-kly.akamaized.net/FPC3LE3Klfhtx5UDUHt6RFNEgJE=/0x47:720x453/673x379/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3499629/original/008637600_1625230400-Manchester_United_-_Jadon_Sancho.jpg"
-        ))
-
-        listMateri.add(Materi(
-            "Mantap",
-            "https://cdn1-production-images-kly.akamaized.net/FPC3LE3Klfhtx5UDUHt6RFNEgJE=/0x47:720x453/673x379/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3499629/original/008637600_1625230400-Manchester_United_-_Jadon_Sancho.jpg"
-        ))
-        listMateri.add(Materi(
-            "Mantap",
-            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90"
-        ))
-        listMateri.add(Materi(
-            "Mantap",
-            "https://cdn1-production-images-kly.akamaized.net/FPC3LE3Klfhtx5UDUHt6RFNEgJE=/0x47:720x453/673x379/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3499629/original/008637600_1625230400-Manchester_United_-_Jadon_Sancho.jpg"
-        ))
-        listMateri.add(Materi(
-            "Mantap",
-            "https://akcdn.detik.net.id/community/media/visual/2021/05/19/manchester-united.jpeg?w=700&q=90"
-        ))
-        listMateri.add(Materi(
-            "Mantap",
-            "https://cdn1-production-images-kly.akamaized.net/FPC3LE3Klfhtx5UDUHt6RFNEgJE=/0x47:720x453/673x379/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3499629/original/008637600_1625230400-Manchester_United_-_Jadon_Sancho.jpg"
-        ))
-
-        adapter.setListMateri(listMateri)
-
     }
 }

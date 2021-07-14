@@ -2,6 +2,7 @@ package id.co.core.domain.iterator
 
 import id.co.core.data.model.Category
 import id.co.core.data.model.Materi
+import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.network.ResponseState
 import id.co.core.domain.repository.Repository
@@ -21,6 +22,10 @@ class Iterator(
 
     override fun getCategory(): Flow<ResponseState<List<Category>>> {
         return repository.getCategory()
+    }
+
+    override fun getQuizSearch(search: String): Flow<ResponseState<List<Quiz>>> {
+        return repository.getQuizSearch(search)
     }
 
 }

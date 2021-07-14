@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.co.core.data.model.Materi
+import id.co.core.util.Constant
 import id.co.materi.databinding.ItemMateriBinding
 
 class MateriAdapter: RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
@@ -22,7 +23,7 @@ class MateriAdapter: RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
         fun bind(materi: Materi){
             binding.tvMateri.text=materi.materi
             Glide.with(itemView.context)
-                .load(materi.image)
+                .load(Constant.BASE_URL_IMAGE+materi.image)
                 .into(binding.ivMateri)
         }
     }

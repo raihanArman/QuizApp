@@ -2,6 +2,7 @@ package id.co.core.data.repositories
 
 import id.co.core.data.model.Category
 import id.co.core.data.model.Materi
+import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.network.ResponseState
 import id.co.core.data.repositories.remote.RemoteDataSource
@@ -21,5 +22,9 @@ class DataRepository(
 
     override fun getCategory(): Flow<ResponseState<List<Category>>> {
         return remote.getCategory()
+    }
+
+    override fun getQuizSearch(search: String): Flow<ResponseState<List<Quiz>>> {
+        return remote.getQuizSearch(search)
     }
 }

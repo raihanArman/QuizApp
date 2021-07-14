@@ -2,6 +2,7 @@ package id.co.core.data.network
 
 import id.co.core.data.model.Category
 import id.co.core.data.model.Materi
+import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.response.ResponseData
 import retrofit2.http.GET
@@ -18,5 +19,10 @@ interface ApiService {
 
     @GET("tampil_category.php")
     suspend fun getCategory(): ResponseData<List<Category>>
+
+    @GET("quiz_search.php")
+    suspend fun getQuizSearch(
+        @Query("cari") search: String
+    ): ResponseData<List<Quiz>>
 
 }

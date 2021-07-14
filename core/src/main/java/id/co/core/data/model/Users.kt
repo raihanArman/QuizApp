@@ -18,5 +18,14 @@ data class Users(
 
     @SerializedName("status")
     @Expose
-    var status: String ?= ""
+    var status: String ?= "",
+
+    @SerializedName("last_score")
+    @Expose
+    var lastScore: String ?= "",
+
+    @SerializedName("sum_quiz")
+    @Expose
+    var sumQuiz: String ?= "",
+
 )

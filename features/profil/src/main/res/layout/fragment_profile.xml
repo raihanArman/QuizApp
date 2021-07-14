@@ -43,6 +43,7 @@
                 app:layout_constraintTop_toTopOf="@+id/circleImageView">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/heebo_medium"
@@ -51,6 +52,7 @@
                     tools:text="ApisApis" />
 
                 <TextView
+                    android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/heebo_regular"
@@ -75,6 +77,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView">
 
                 <TextView
+                    android:id="@+id/tv_quiz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/heebo_medium"
@@ -88,7 +91,7 @@
                     android:fontFamily="@font/heebo_medium"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    tools:text="Quiz" />
+                    android:text="Quiz" />
             </LinearLayout>
 
 
@@ -107,6 +110,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView">
 
                 <TextView
+                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/heebo_medium"
@@ -120,7 +124,7 @@
                     android:fontFamily="@font/heebo_medium"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    tools:text="Score" />
+                    android:text="Score" />
             </LinearLayout>
 
 
