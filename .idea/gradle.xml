@@ -19,6 +19,8 @@
             <option value="$PROJECT_DIR$/features/materi" />
             <option value="$PROJECT_DIR$/features/profil" />
             <option value="$PROJECT_DIR$/features/search" />
+            <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/datastore" />
             <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>

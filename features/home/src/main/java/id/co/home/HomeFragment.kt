@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadUsersData() {
-        viewModel.getUsersById("1").observe(viewLifecycleOwner, Observer { response ->
+        viewModel.getUsersById().observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is ResponseState.Success ->{
                     setDataUsers(response.data)

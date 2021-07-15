@@ -8,8 +8,11 @@ import id.co.core.data.network.ResponseState
 import kotlinx.coroutines.flow.Flow
 
 interface UseCase {
-    fun getUsersById(id: String): Flow<ResponseState<Users>>
+    fun getUsersById(): Flow<ResponseState<Users>>
     fun getMateri(): Flow<ResponseState<List<Materi>>>
     fun getCategory(): Flow<ResponseState<List<Category>>>
     fun getQuizSearch(search: String): Flow<ResponseState<List<Quiz>>>
+
+    fun loginUser(email: String, password: String): Flow<ResponseState<Users>>
+    fun registerUser(email: String, name: String, password: String): Flow<ResponseState<Users>>
 }

@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 class DataRepository(
     private val remote: RemoteDataSource
 ): Repository {
-    override fun getUsersById(id: String): Flow<ResponseState<Users>> {
-        return remote.getUsersById(id)
+    override fun getUsersById(): Flow<ResponseState<Users>> {
+        return remote.getUsersById()
     }
 
     override fun getMateri(): Flow<ResponseState<List<Materi>>> {
@@ -26,5 +26,17 @@ class DataRepository(
 
     override fun getQuizSearch(search: String): Flow<ResponseState<List<Quiz>>> {
         return remote.getQuizSearch(search)
+    }
+
+    override fun loginUser(email: String, password: String): Flow<ResponseState<Users>> {
+        return remote.loginUser(email, password)
+    }
+
+    override fun registerUser(
+        email: String,
+        name: String,
+        password: String
+    ): Flow<ResponseState<Users>> {
+        return remote.registerUser(email, name, password)
     }
 }

@@ -5,8 +5,7 @@ import id.co.core.data.model.Materi
 import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.response.ResponseData
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("tampil_user_by_id.php")
@@ -24,5 +23,20 @@ interface ApiService {
     suspend fun getQuizSearch(
         @Query("cari") search: String
     ): ResponseData<List<Quiz>>
+
+    @FormUrlEncoded
+    @POST("login.php")
+    suspend fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): ResponseData<Users>
+
+    @FormUrlEncoded
+    @POST("register.php")
+    suspend fun registerUser(
+        @Field("email") email: String,
+        @Field("name") name: String,
+        @Field("password") password: String
+    ): ResponseData<Users>
 
 }

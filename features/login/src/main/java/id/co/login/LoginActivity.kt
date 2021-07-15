@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.airbnb.deeplinkdispatch.DeepLink
+import id.co.core.util.AppLink
 import id.co.login.databinding.ActivityLoginBinding
 
+@DeepLink(AppLink.Login.LOGIN_LINK)
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var dataBinding: ActivityLoginBinding
+    lateinit var dataBinding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

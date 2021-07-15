@@ -25,12 +25,12 @@
                     android:layout_marginLeft="20dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_marginTop="30dp"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/icon"/>
+<!--                    <ImageView-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="30dp"-->
+<!--                        android:layout_width="60dp"-->
+<!--                        android:layout_height="60dp"-->
+<!--                        android:src="@drawable/icon"/>-->
 
                     <LinearLayout
                         android:layout_marginTop="8dp"

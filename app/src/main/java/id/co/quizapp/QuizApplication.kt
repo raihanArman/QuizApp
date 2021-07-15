@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.core.di.CoreModule.networkModule
 import id.co.core.di.CoreModule.repositoryModule
+import id.co.datastore.module.DataStoreModule.dataStoreModule
 import id.co.quizapp.module.AppModule.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,6 +19,7 @@ class QuizApplication: Application() {
             androidLogger(Level.NONE)
             androidContext(this@QuizApplication)
             modules(listOf(
+                dataStoreModule,
                 networkModule,
                 repositoryModule,
                 useCaseModule

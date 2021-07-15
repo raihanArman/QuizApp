@@ -10,8 +10,8 @@ import id.co.core.data.network.ResponseState
 import id.co.core.domain.usecase.UseCase
 
 class HomeViewModel(val useCase: UseCase): ViewModel() {
-    fun getUsersById(id: String): LiveData<ResponseState<Users>> {
-        return useCase.getUsersById(id).asLiveData()
+    fun getUsersById(): LiveData<ResponseState<Users>> {
+        return useCase.getUsersById().asLiveData()
     }
 
     fun getMateri(): LiveData<ResponseState<List<Materi>>>{

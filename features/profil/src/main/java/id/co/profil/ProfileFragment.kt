@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupObserve() {
-        viewModel.getUserById("1").observe(viewLifecycleOwner, Observer { response ->
+        viewModel.getUserById().observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is ResponseState.Success ->{
                     setData(response.data)

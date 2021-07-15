@@ -8,7 +8,7 @@ import id.co.core.data.network.ResponseState
 import id.co.core.domain.usecase.UseCase
 
 class ProfileViewModel(val useCase: UseCase): ViewModel() {
-    fun getUserById(id: String): LiveData<ResponseState<Users>> {
-        return useCase.getUsersById(id).asLiveData()
+    fun getUserById(): LiveData<ResponseState<Users>> {
+        return useCase.getUsersById().asLiveData()
     }
 }
