@@ -1,9 +1,6 @@
 package id.co.core.data.repositories
 
-import id.co.core.data.model.Category
-import id.co.core.data.model.Materi
-import id.co.core.data.model.Quiz
-import id.co.core.data.model.Users
+import id.co.core.data.model.*
 import id.co.core.data.network.ResponseState
 import id.co.core.data.repositories.remote.RemoteDataSource
 import id.co.core.domain.repository.Repository
@@ -38,5 +35,10 @@ class DataRepository(
         password: String
     ): Flow<ResponseState<Users>> {
         return remote.registerUser(email, name, password)
+    }
+
+
+    override fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>> {
+        return remote.getBabByMateri(id)
     }
 }

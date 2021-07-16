@@ -1,22 +1,15 @@
 package id.co.core.data.repositories.remote
 
 import android.util.Log
-import androidx.lifecycle.asLiveData
+import id.co.core.data.model.*
 import id.co.datastore.UserDataStore
-import id.co.core.data.model.Category
-import id.co.core.data.model.Materi
-import id.co.core.data.model.Quiz
-import id.co.core.data.model.Users
 import id.co.core.data.network.ApiService
 import id.co.core.data.network.ResponseState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class RemoteDataSource(
     private val apiService: ApiService,
@@ -133,4 +126,20 @@ class RemoteDataSource(
         }
     }
 
+    fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>>{
+        return flow {
+            emit(ResponseState.Loading())
+            try{
+                val response = apiService.getBabByMateri(id)
+                val data = response.data
+                if(data.isNotEmpty()){
+                    emit(ResponseState.Success(data))
+                }else{
+                    emit((ResponseState.Empty))
+                }
+            }catch (e: Exception){
+                emit(ResponseState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

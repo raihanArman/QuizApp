@@ -1,31 +1,29 @@
 package id.co.materi
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import id.co.core.data.model.Materi
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.co.core.data.model.Chapter
 import id.co.core.data.network.ResponseState
-import id.co.materi.databinding.FragmentMateriBinding
-import id.co.materi.module.MateriModule.materiModule
+import id.co.materi.databinding.FragmentChapterBinding
+import id.co.materi.module.MateriModule
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class MateriFragment : Fragment() {
+class ChapterFragment : Fragment() {
 
-    private lateinit var dataBinding: FragmentMateriBinding
+    private lateinit var dataBinding: FragmentChapterBinding
     private val viewModel: MateriViewModel by viewModel()
 
-    private val adapter : MateriAdapter by lazy {
-        MateriAdapter{
-            showBabByMateri(it)
-        }
+    private val adapter : ChapterAdapter by lazy {
+        ChapterAdapter()
     }
 
     override fun onCreateView(
@@ -33,22 +31,30 @@ class MateriFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_materi, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_chapter, container, false)
         return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadKoinModules(materiModule)
+        loadKoinModules(MateriModule.materiModule)
 
         setupAdapter()
         setupObserve()
 
+        dataBinding.ivBack.setOnClickListener {
+//            val deepLink = Uri.parse("quiz://materi")
+            findNavController().navigateUp()
+        }
+
     }
 
     private fun setupObserve() {
-        viewModel.getMateri.observe(viewLifecycleOwner, Observer { response ->
+        val id = arguments?.getString("id")
+        val title = arguments?.getString("title")
+        dataBinding.tvTitle.text = title
+        viewModel.getBabByMateri(id!!).observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is ResponseState.Success ->{
                     setDataMateri(response.data)
@@ -57,29 +63,19 @@ class MateriFragment : Fragment() {
 
                 }
                 is ResponseState.Error ->{
-
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                 }
 
             }
         })
     }
 
-    private fun setDataMateri(data: List<Materi>) {
-        adapter.setListMateri(data)
+    private fun setDataMateri(data: List<Chapter>) {
+        adapter.setBab(data)
     }
 
     private fun setupAdapter() {
-        dataBinding.rvMateri.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        dataBinding.rvMateri.adapter = adapter
+        dataBinding.rvBab.layoutManager = LinearLayoutManager(requireContext())
+        dataBinding.rvBab.adapter = adapter
     }
-
-
-    private fun showBabByMateri(materi: Materi){
-        val navController = findNavController()
-//        val arg = BabFragmentArgs(materi).toBundle()
-        val deepLink = Uri.parse("quiz://bab/${materi.id}/${materi.materi}")
-        findNavController().navigate(deepLink)
-
-    }
-
 }

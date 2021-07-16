@@ -1,9 +1,6 @@
 package id.co.core.data.network
 
-import id.co.core.data.model.Category
-import id.co.core.data.model.Materi
-import id.co.core.data.model.Quiz
-import id.co.core.data.model.Users
+import id.co.core.data.model.*
 import id.co.core.data.response.ResponseData
 import retrofit2.http.*
 
@@ -38,5 +35,11 @@ interface ApiService {
         @Field("name") name: String,
         @Field("password") password: String
     ): ResponseData<Users>
+
+    @GET("tampil_bab.php")
+    suspend fun getBabByMateri(
+        @Query("id_materi") id: String
+    ): ResponseData<List<Chapter>>
+
 
 }

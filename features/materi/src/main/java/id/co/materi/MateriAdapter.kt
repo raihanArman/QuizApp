@@ -9,7 +9,7 @@ import id.co.core.data.model.Materi
 import id.co.core.util.Constant
 import id.co.materi.databinding.ItemMateriBinding
 
-class MateriAdapter: RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
+class MateriAdapter(val showBab: (Materi) -> Unit): RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
 
     val listMateri = ArrayList<Materi>()
 
@@ -25,6 +25,9 @@ class MateriAdapter: RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
             Glide.with(itemView.context)
                 .load(Constant.BASE_URL_IMAGE+materi.image)
                 .into(binding.ivMateri)
+            itemView.setOnClickListener {
+                showBab(materi)
+            }
         }
     }
 

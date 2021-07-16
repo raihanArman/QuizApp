@@ -1,9 +1,6 @@
 package id.co.core.domain.iterator
 
-import id.co.core.data.model.Category
-import id.co.core.data.model.Materi
-import id.co.core.data.model.Quiz
-import id.co.core.data.model.Users
+import id.co.core.data.model.*
 import id.co.core.data.network.ResponseState
 import id.co.core.domain.repository.Repository
 import id.co.core.domain.usecase.UseCase
@@ -38,6 +35,10 @@ class Iterator(
         password: String
     ): Flow<ResponseState<Users>> {
         return repository.registerUser(email, name, password)
+    }
+
+    override fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>> {
+        return repository.getBabByMateri(id)
     }
 
 }
