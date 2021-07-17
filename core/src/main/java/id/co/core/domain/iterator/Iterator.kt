@@ -41,4 +41,8 @@ class Iterator(
         return repository.getBabByMateri(id)
     }
 
+    override fun getContentById(id: String): Flow<ResponseState<Chapter>> {
+        return repository.getContentById(id)
+    }
+
 }

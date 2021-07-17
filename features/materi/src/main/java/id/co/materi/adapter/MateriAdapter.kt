@@ -1,4 +1,4 @@
-package id.co.materi
+package id.co.materi.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.co.core.data.model.Materi
 import id.co.core.util.Constant
+import id.co.materi.R
 import id.co.materi.databinding.ItemMateriBinding
 
 class MateriAdapter(val showBab: (Materi) -> Unit): RecyclerView.Adapter<MateriAdapter.ViewHolder>() {
@@ -33,7 +34,8 @@ class MateriAdapter(val showBab: (Materi) -> Unit): RecyclerView.Adapter<MateriA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: ItemMateriBinding = DataBindingUtil.inflate(inflater, R.layout.item_materi, parent, false)
+        val binding: ItemMateriBinding = DataBindingUtil.inflate(inflater,
+            R.layout.item_materi, parent, false)
         return ViewHolder(binding)
     }
 

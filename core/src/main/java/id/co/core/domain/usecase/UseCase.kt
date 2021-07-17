@@ -14,4 +14,6 @@ interface UseCase {
     fun registerUser(email: String, name: String, password: String): Flow<ResponseState<Users>>
     fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>>
 
+    fun getContentById(id: String): Flow<ResponseState<Chapter>>
+
 }

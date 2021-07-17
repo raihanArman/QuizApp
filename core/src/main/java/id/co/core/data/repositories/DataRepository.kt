@@ -41,4 +41,8 @@ class DataRepository(
     override fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>> {
         return remote.getBabByMateri(id)
     }
+
+    override fun getContentById(id: String): Flow<ResponseState<Chapter>> {
+        return remote.getContentById(id)
+    }
 }

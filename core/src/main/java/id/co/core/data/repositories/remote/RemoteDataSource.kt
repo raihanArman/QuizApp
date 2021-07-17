@@ -142,4 +142,22 @@ class RemoteDataSource(
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getContentById(id: String): Flow<ResponseState<Chapter>>{
+        return flow{
+            emit(ResponseState.Loading())
+            try{
+                val response = apiService.getContentById(id)
+                val data = response.data
+                if(data != null){
+                    emit(ResponseState.Success(data))
+                }else{
+                    emit(ResponseState.Empty)
+                }
+            }catch (e: Exception){
+                emit(ResponseState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 }

@@ -1,4 +1,4 @@
-package id.co.materi
+package id.co.materi.ui
 
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import id.co.core.data.model.Materi
 import id.co.core.data.network.ResponseState
+import id.co.materi.R
+import id.co.materi.adapter.MateriAdapter
 import id.co.materi.databinding.FragmentMateriBinding
 import id.co.materi.module.MateriModule.materiModule
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -77,6 +79,7 @@ class MateriFragment : Fragment() {
     private fun showBabByMateri(materi: Materi){
         val navController = findNavController()
 //        val arg = BabFragmentArgs(materi).toBundle()
+        viewModel.setSelectedMateri(materi.id!!)
         val deepLink = Uri.parse("quiz://bab/${materi.id}/${materi.materi}")
         findNavController().navigate(deepLink)
 

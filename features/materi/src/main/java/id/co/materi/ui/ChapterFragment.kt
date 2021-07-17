@@ -1,5 +1,6 @@
-package id.co.materi
+package id.co.materi.ui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,18 +13,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.co.core.data.model.Chapter
 import id.co.core.data.network.ResponseState
+import id.co.materi.R
+import id.co.materi.adapter.ChapterAdapter
+import id.co.materi.adapter.ChapterAdapterClickListener
 import id.co.materi.databinding.FragmentChapterBinding
 import id.co.materi.module.MateriModule
+import id.co.materi.utils.Constant
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class ChapterFragment : Fragment() {
+class ChapterFragment : Fragment(), ChapterAdapterClickListener {
 
     private lateinit var dataBinding: FragmentChapterBinding
-    private val viewModel: MateriViewModel by viewModel()
+    val viewModel: MateriViewModel by viewModel()
 
     private val adapter : ChapterAdapter by lazy {
-        ChapterAdapter()
+        ChapterAdapter(this)
     }
 
     override fun onCreateView(
@@ -72,10 +77,17 @@ class ChapterFragment : Fragment() {
 
     private fun setDataMateri(data: List<Chapter>) {
         adapter.setBab(data)
+        Constant.listChapter = data as ArrayList<Chapter>
     }
 
     private fun setupAdapter() {
         dataBinding.rvBab.layoutManager = LinearLayoutManager(requireContext())
         dataBinding.rvBab.adapter = adapter
+    }
+
+    override fun onItemClicked(position: Int, moduleId: String?) {
+        viewModel.setSelectedChapter(moduleId!!, position)
+        val deepLink = Uri.parse("quiz://content/${moduleId}/${position}")
+        findNavController().navigate(deepLink)
     }
 }
