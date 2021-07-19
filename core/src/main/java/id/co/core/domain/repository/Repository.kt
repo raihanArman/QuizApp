@@ -15,6 +15,7 @@ interface Repository {
     fun getBabByMateri(id: String): Flow<ResponseState<List<Chapter>>>
 
     fun getContentById(id: String): Flow<ResponseState<Chapter>>
+    fun getQuestion(id: String): Flow<ResponseState<List<Question>>>
 
 }
 

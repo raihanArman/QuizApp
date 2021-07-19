@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.deeplinkdispatch.DeepLinkHandler
 import id.co.login.module.LoginDeepLink
 import id.co.login.module.LoginDeepLinkLoader
+import id.co.quiz.module.QuizDeepLink
+import id.co.quiz.module.QuizDeepLinkLoader
 
 
 @DeepLinkHandler(
     AppDeepLinkModule::class,
     LoginDeepLink::class,
-    MainDeepLink::class
+    MainDeepLink::class,
+    QuizDeepLink::class
 )
 class DeepLinkRouterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +21,8 @@ class DeepLinkRouterActivity: AppCompatActivity() {
         val deepLinkDelegate = DeepLinkDelegate(
             AppDeepLinkModuleLoader(),
             LoginDeepLinkLoader(),
-            MainDeepLinkLoader()
+            MainDeepLinkLoader(),
+            QuizDeepLinkLoader()
         )
         deepLinkDelegate.dispatchFrom(this)
         finish()

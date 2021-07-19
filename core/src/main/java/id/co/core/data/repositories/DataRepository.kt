@@ -45,4 +45,8 @@ class DataRepository(
     override fun getContentById(id: String): Flow<ResponseState<Chapter>> {
         return remote.getContentById(id)
     }
+
+    override fun getQuestion(id: String): Flow<ResponseState<List<Question>>> {
+        return remote.getQuestion(id)
+    }
 }

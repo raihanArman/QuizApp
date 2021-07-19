@@ -37,6 +37,7 @@
                 <data android:scheme="quiz"/>
                 <data android:host="login"/>
                 <data android:host="main"/>
+                <data android:host="quiz"/>
             </intent-filter>
         </activity>
     </application>

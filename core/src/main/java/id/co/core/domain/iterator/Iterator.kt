@@ -45,4 +45,8 @@ class Iterator(
         return repository.getContentById(id)
     }
 
+    override fun getQuestion(id: String): Flow<ResponseState<List<Question>>> {
+        return repository.getQuestion(id)
+    }
+
 }

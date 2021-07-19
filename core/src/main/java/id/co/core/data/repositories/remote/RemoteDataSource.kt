@@ -160,4 +160,21 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
+    fun getQuestion(id: String): Flow<ResponseState<List<Question>>>{
+        return flow {
+            emit(ResponseState.Loading())
+            try{
+                val response = apiService.getQuestion(id)
+                val data = response.data
+                if(data != null){
+                    emit(ResponseState.Success(data))
+                }else{
+                    emit(ResponseState.Empty)
+                }
+            }catch (e: Exception){
+                emit(ResponseState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 }

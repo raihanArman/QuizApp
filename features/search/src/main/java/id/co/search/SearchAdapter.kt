@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.co.core.data.model.Quiz
 import id.co.search.databinding.ItemSearchBinding
 
-class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(val showQuiz : (Quiz) -> Unit): RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private val quizList = ArrayList<Quiz>()
 
@@ -36,6 +36,10 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
             binding.tvName.text = quiz.name
             binding.tvCategory.text = quiz.category
             binding.tvSumQue.text = quiz.sumQuestions
+
+            itemView.setOnClickListener {
+                showQuiz(quiz)
+            }
         }
     }
 

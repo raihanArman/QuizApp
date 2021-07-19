@@ -46,4 +46,9 @@ interface ApiService {
         @Query("id_bab") id: String
     ): ResponseData<Chapter>
 
+    @GET("tampil_question.php")
+    suspend fun getQuestion(
+        @Query("id_quiz") id: String
+    ): ResponseData<List<Question>>
+
 }

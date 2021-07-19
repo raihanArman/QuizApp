@@ -12,4 +12,8 @@ object AppLink {
     object Main{
         const val MAIN_LINK = "quiz://main"
     }
+    object Quiz{
+        const val QUIZ_LINK = "quiz://quiz/{quiz_id}"
+        const val PARAM_QUIZ_ID = "quiz_id"
+    }
 }

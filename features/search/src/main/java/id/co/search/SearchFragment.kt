@@ -1,5 +1,7 @@
 package id.co.search
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,7 +24,9 @@ class SearchFragment : Fragment() {
 
     private lateinit var dataBinding: FragmentSearchBinding
     private val adapter: SearchAdapter by lazy{
-        SearchAdapter()
+        SearchAdapter{
+            goToQuiz(it)
+        }
     }
 
     private val viewModel: SearchViewModel by viewModel()
@@ -87,4 +91,10 @@ class SearchFragment : Fragment() {
         dataBinding.rvQuiz.layoutManager = LinearLayoutManager(requireContext())
         dataBinding.rvQuiz.adapter = adapter
     }
+
+    private fun goToQuiz(quiz: Quiz){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("quiz://quiz/${quiz.id}"))
+        startActivity(intent)
+    }
+
 }

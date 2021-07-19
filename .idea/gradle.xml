@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/features/login" />
             <option value="$PROJECT_DIR$/features/materi" />
             <option value="$PROJECT_DIR$/features/profil" />
+            <option value="$PROJECT_DIR$/features/quiz" />
             <option value="$PROJECT_DIR$/features/search" />
             <option value="$PROJECT_DIR$/libraries" />
             <option value="$PROJECT_DIR$/libraries/datastore" />
