@@ -16,6 +16,12 @@ class UserDataStore (private val context: Context){
         val STATUS_LOGIN = booleanPreferencesKey("status_login")
         val TOKEN_USER = stringPreferencesKey("TOKEN_USER")
     }
+
+    suspend fun storeTokenUser(token: String){
+        dataStore.edit {
+            it[TOKEN_USER] = token
+        }
+    }
     suspend fun storeUser(idUser: String){
         dataStore.edit {
             it[ID_USER] = idUser
@@ -25,6 +31,9 @@ class UserDataStore (private val context: Context){
         it[ID_USER] ?: ""
     }
 
+    val getTokenUserFlow: Flow<String> = dataStore.data.map {
+        it[TOKEN_USER] ?: ""
+    }
     suspend fun storeStatusLogin(status: Boolean){
         dataStore.edit {
             it[STATUS_LOGIN] = status

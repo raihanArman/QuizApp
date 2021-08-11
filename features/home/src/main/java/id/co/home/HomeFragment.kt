@@ -1,5 +1,6 @@
 package id.co.home
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.co.core.data.model.Category
@@ -24,12 +26,26 @@ class HomeFragment : Fragment() {
     private lateinit var dataBinding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModel()
 
-    private val popularAdapter: PopularAdapter by lazy {
-        PopularAdapter()
+//    private val popularAdapter: PopularAdapter by lazy {
+//        PopularAdapter{
+//            showQuiz(it)
+//        }
+//    }
+
+    private fun showQuiz(materi: Materi) {
+        val deepLink = Uri.parse("quiz://quizbypath/${materi.id}/${materi.materi}")
+        findNavController().navigate(deepLink)
     }
 
     private val categoryAdapter: CategoryAdapter by lazy{
-        CategoryAdapter()
+        CategoryAdapter{
+            showMateri(it)
+        }
+    }
+
+    private fun showMateri(category: Category) {
+        val deepLink = Uri.parse("quiz://materibycategory/${category.id}/${category.name}")
+        findNavController().navigate(deepLink)
     }
 
     override fun onCreateView(
@@ -49,7 +65,7 @@ class HomeFragment : Fragment() {
         setupAdapter()
 
         loadUsersData()
-        loadMateri()
+//        loadMateri()
         loadCategory()
 
     }
@@ -74,25 +90,25 @@ class HomeFragment : Fragment() {
         categoryAdapter.setListCategory(data)
     }
 
-    private fun loadMateri() {
-        viewModel.getMateri().observe(viewLifecycleOwner, Observer {response ->
-            when(response){
-                is ResponseState.Loading ->{
+//    private fun loadMateri() {
+//        viewModel.getPopularPath().observe(viewLifecycleOwner, Observer {response ->
+//            when(response){
+//                is ResponseState.Loading ->{
+//
+//                }
+//                is ResponseState.Success ->{
+//                    setDataMateri(response.data)
+//                }
+//                is ResponseState.Error ->{
+//
+//                }
+//            }
+//        })
+//    }
 
-                }
-                is ResponseState.Success ->{
-                    setDataMateri(response.data)
-                }
-                is ResponseState.Error ->{
-
-                }
-            }
-        })
-    }
-
-    private fun setDataMateri(data: List<Materi>) {
-        popularAdapter.setListMateri(data)
-    }
+//    private fun setDataMateri(data: List<Materi>) {
+//        popularAdapter.setListMateri(data)
+//    }
 
     private fun loadUsersData() {
         viewModel.getUsersById().observe(viewLifecycleOwner, Observer { response ->
@@ -119,12 +135,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        dataBinding.rvPopular.apply {
-            val horiz = LinearLayoutManager(requireContext())
-            horiz.orientation = LinearLayoutManager.HORIZONTAL
-            layoutManager = horiz
-            adapter = popularAdapter
-        }
+//        dataBinding.rvPopular.apply {
+//            val horiz = LinearLayoutManager(requireContext())
+//            horiz.orientation = LinearLayoutManager.HORIZONTAL
+//            layoutManager = horiz
+//            adapter = popularAdapter
+//        }
 
 
         dataBinding.rvCategory.apply {

@@ -1,6 +1,6 @@
 package id.co.quiz.module
 
-import id.co.quiz.QuizViewModel
+import id.co.quiz.ui.QuizViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

@@ -1,6 +1,7 @@
 package id.co.search
 
 import androidx.lifecycle.*
+import id.co.core.data.model.Check
 import id.co.core.data.model.Materi
 import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
@@ -16,6 +17,10 @@ class SearchViewModel(val useCase: UseCase): ViewModel() {
 //    }
     fun getQuizSearch(search: String): LiveData<ResponseState<List<Quiz>>> {
         return useCase.getQuizSearch(search).asLiveData()
+    }
+
+    fun getQuizCheck(quizId: String): LiveData<ResponseState<Check>> {
+        return useCase.getQuizCheck(quizId).asLiveData()
     }
 
 }

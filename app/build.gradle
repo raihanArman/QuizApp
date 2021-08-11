@@ -20,6 +20,7 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "dev"
     }
 
     buildTypes {
@@ -38,6 +39,14 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    productFlavors{
+        dev {
+            applicationId = "id.co.quizapp.dev"
+            buildConfigField "String", "BASE_URL", "\"http://192.168.1.9:8000/\""
+        }
+    }
+
 }
 
 dependencies {
@@ -47,6 +56,7 @@ dependencies {
     implementation project(path: ':features:login')
     implementation project(path: ':core')
     implementation project(path: ':libraries:datastore')
+    implementation project(path: ':libraries:room')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'

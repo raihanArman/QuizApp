@@ -93,8 +93,25 @@ class SearchFragment : Fragment() {
     }
 
     private fun goToQuiz(quiz: Quiz){
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("quiz://quiz/${quiz.id}"))
-        startActivity(intent)
+        viewModel.getQuizCheck(quiz.id!!).observe(viewLifecycleOwner){response ->
+            when(response){
+                is ResponseState.Success ->{
+                    if(response.data.startQuiz){
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("quiz://quiz/${quiz.id}"))
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(requireContext(), "Anda sudah mengambil quiz ini", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is ResponseState.Loading ->{
+
+                }
+                is ResponseState.Error ->{
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
     }
 
 }

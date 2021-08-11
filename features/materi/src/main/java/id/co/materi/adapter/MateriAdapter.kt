@@ -24,7 +24,7 @@ class MateriAdapter(val showBab: (Materi) -> Unit): RecyclerView.Adapter<MateriA
         fun bind(materi: Materi){
             binding.tvMateri.text=materi.materi
             Glide.with(itemView.context)
-                .load(Constant.BASE_URL_IMAGE+materi.image)
+                .load(materi.image)
                 .into(binding.ivMateri)
             itemView.setOnClickListener {
                 showBab(materi)

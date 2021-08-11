@@ -1,13 +1,19 @@
 package id.co.profil
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.co.core.data.model.History
 import id.co.core.data.model.Quiz
 import id.co.core.data.model.Users
 import id.co.core.data.network.ResponseState
@@ -42,7 +48,46 @@ class ProfileFragment : Fragment() {
         setupAdapter()
         setupObserve()
 
+        dataBinding.tvLogout.setOnClickListener {
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setMessage("Apakah anda yakin ingin logout ?")
+            alertDialog.setPositiveButton("Ya", object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    logoutProses()
+                }
+            })
+            alertDialog.setNegativeButton("Tidak", object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    dialog!!.dismiss()
+                }
+            })
+            alertDialog.show()
+        }
 
+
+    }
+
+    private fun logoutProses() {
+        viewModel.logoutUser().observe(viewLifecycleOwner, Observer {response->
+            when(response){
+                is ResponseState.Success ->{
+                    gotoLogin(response.data)
+                }
+                is ResponseState.Loading ->{
+
+                }
+                is ResponseState.Error->{
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun gotoLogin(data: String) {
+        Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("quiz://login"))
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     private fun setupObserve() {
@@ -59,6 +104,24 @@ class ProfileFragment : Fragment() {
                 }
             }
         })
+
+        viewModel.getHistoryByUser().observe(viewLifecycleOwner, Observer {response->
+            when(response){
+                is ResponseState.Success ->{
+                    setDataHistory(response.data)
+                }
+                is ResponseState.Loading ->{
+
+                }
+                is ResponseState.Error->{
+
+                }
+            }
+        })
+    }
+
+    private fun setDataHistory(data: List<History>) {
+        adapter.setListHistory(data)
     }
 
     private fun setData(data: Users) {

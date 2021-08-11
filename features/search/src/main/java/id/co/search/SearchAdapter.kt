@@ -35,7 +35,7 @@ class SearchAdapter(val showQuiz : (Quiz) -> Unit): RecyclerView.Adapter<SearchA
         fun bind(quiz: Quiz){
             binding.tvName.text = quiz.name
             binding.tvCategory.text = quiz.category
-            binding.tvSumQue.text = quiz.sumQuestions
+//            binding.tvSumQue.text = quiz.sumQuestions
 
             itemView.setOnClickListener {
                 showQuiz(quiz)

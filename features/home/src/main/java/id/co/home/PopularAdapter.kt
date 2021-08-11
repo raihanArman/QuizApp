@@ -6,10 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.co.core.data.model.Materi
+import id.co.core.data.model.Quiz
 import id.co.core.util.Constant
 import id.co.home.databinding.ItemPopularBinding
 
-class PopularAdapter: RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(val showQuiz: (Materi) -> Unit): RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     val listMateri = ArrayList<Materi>()
 
@@ -37,8 +38,13 @@ class PopularAdapter: RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
             binding.tvMateri.text = materi.materi
             binding.tvStudent.text = materi.student+" student"
             Glide.with(itemView.context)
-                .load(Constant.BASE_URL_IMAGE+materi.image)
+                .load(materi.image)
                 .into(binding.ivMateri)
+
+            itemView.setOnClickListener {
+                showQuiz(materi)
+            }
+
         }
     }
 

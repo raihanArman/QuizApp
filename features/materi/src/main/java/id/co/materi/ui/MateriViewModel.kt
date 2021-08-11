@@ -3,6 +3,7 @@ package id.co.materi.ui
 import android.util.Log
 import androidx.lifecycle.*
 import id.co.core.data.model.Chapter
+import id.co.core.data.model.Materi
 import id.co.core.data.network.ResponseState
 import id.co.core.domain.usecase.UseCase
 import id.co.materi.utils.Constant
@@ -14,6 +15,11 @@ class MateriViewModel(val usecase: UseCase): ViewModel() {
     var materiId = MutableLiveData<String>()
     var position = MutableLiveData<Int>()
     var listChapter = MutableLiveData<List<Chapter>>()
+
+
+    fun getPathByCategory(id: String): LiveData<ResponseState<List<Materi>>> {
+        return usecase.getPathByCategory(id).asLiveData()
+    }
 
     fun setSelectedChapter(chapterId: String, position: Int) {
         this.chapterId.value = chapterId

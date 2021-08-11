@@ -3,7 +3,8 @@
     package="id.co.quiz">
 
     <application>
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".ui.ResultActivity"></activity>
+        <activity android:name=".ui.QuizActivity" />
     </application>
 
 </manifest>

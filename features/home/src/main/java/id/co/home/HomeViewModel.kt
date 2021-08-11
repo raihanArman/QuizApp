@@ -14,6 +14,10 @@ class HomeViewModel(val useCase: UseCase): ViewModel() {
         return useCase.getUsersById().asLiveData()
     }
 
+    fun getPopularPath(): LiveData<ResponseState<List<Materi>>>{
+        return useCase.getPopularPath().asLiveData()
+    }
+
     fun getMateri(): LiveData<ResponseState<List<Materi>>>{
         return useCase.getMateri().asLiveData()
     }

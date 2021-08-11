@@ -24,7 +24,7 @@ data class Users(
     @Expose
     var lastScore: String ?= "",
 
-    @SerializedName("sum_quiz")
+    @SerializedName("total_quiz")
     @Expose
     var sumQuiz: String ?= "",
 

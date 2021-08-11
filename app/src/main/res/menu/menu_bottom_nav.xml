@@ -6,15 +6,15 @@
         android:title="Home"
         app:showAsAction="always"/>
     <item android:id="@+id/materiFragment"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="Materi"
         app:showAsAction="always"/>
     <item android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="Cari"
         app:showAsAction="always"/>
     <item android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_baseline_person_24"
         android:title="Profil"
         app:showAsAction="always"/>
 </menu>

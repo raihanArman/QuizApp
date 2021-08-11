@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import id.co.core.data.model.History
 import id.co.core.data.model.Quiz
 import id.co.profil.databinding.ItemHistoryBinding
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private val listHistoryQuiz = ArrayList<Quiz>()
+    private val listHistoryQuiz = ArrayList<History>()
 
-    fun setListHistory(listQuiz: List<Quiz>){
+    fun setListHistory(listQuiz: List<History>){
         this.listHistoryQuiz.clear()
         this.listHistoryQuiz.addAll(listQuiz)
         notifyDataSetChanged()
@@ -19,10 +20,9 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(val binding: ItemHistoryBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(quiz: Quiz){
-            binding.tvName.text = quiz.name
-            binding.tvScore.text = quiz.score
-            binding.tvSumQue.text = quiz.sumQuestions
+        fun bind(history: History){
+            binding.tvName.text = history.quiz[0].name
+            binding.tvScore.text = history.score.toString()
         }
     }
 

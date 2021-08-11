@@ -48,6 +48,7 @@ dependencies {
     implementation project(path: ':features:search')
     implementation project(path: ':features:materi')
     implementation project(path: ':features:profil')
+    implementation project(path: ':features:quiz')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'

@@ -6,10 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.co.core.data.model.Category
+import id.co.core.data.model.Materi
 import id.co.core.util.Constant
 import id.co.home.databinding.ItemCategoryBinding
 
-class CategoryAdapter: RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class CategoryAdapter(val showMateri: (Category) -> Unit): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     private val listCategory = ArrayList<Category>()
 
@@ -37,8 +38,13 @@ class CategoryAdapter: RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
         fun bind(category: Category){
             binding.tvMateri.text = category.name
             Glide.with(itemView.context)
-                .load(Constant.BASE_URL_IMAGE+category.image)
+                .load(category.image)
                 .into(binding.ivMateri)
+
+            itemView.setOnClickListener {
+                showMateri(category)
+            }
+
         }
     }
 

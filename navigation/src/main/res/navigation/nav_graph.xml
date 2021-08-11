@@ -61,4 +61,28 @@
         <argument android:name="id" app:argType="string"/>
         <argument android:name="position" app:argType="string"/>
     </fragment>
+    <fragment
+        android:id="@+id/materiByCategoryFragment"
+        android:name="id.co.materi.ui.MateriByCategoryFragment"
+        android:label="MateriByCategoryFragment"
+        tools:layout="@layout/fragment_materi_by_category">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="quiz://materibycategory/{id}/{title}"/>
+
+        <argument android:name="id" app:argType="string"/>
+        <argument android:name="title" app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/quizByPathFragment"
+        android:name="id.co.quiz.ui.QuizByPathFragment"
+        android:label="QuizByPathFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="quiz://quizbypath/{id}/{title}"/>
+
+        <argument android:name="id" app:argType="string"/>
+        <argument android:name="title" app:argType="string"/>
+    </fragment>
+
 </navigation>
